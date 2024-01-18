@@ -73,7 +73,7 @@ public class ItemsSteps {
         app.getAddingPage().clickBtnSave();
     }
 
-    @Тогда("проверить отображение элемента {string}, {string}, {string} в таблицу")
+    @Тогда("проверить отображение элемента {string}, {string}, {string} в таблице")
     public void checkDisplayElementInTable(String name, String type, String exotic) {
         app.getFoodPage().checkItemInTable(name, type, Boolean.valueOf(exotic));
     }
@@ -83,7 +83,7 @@ public class ItemsSteps {
         app.getFoodPage().deleteItems();
     }
 
-    @Если("не заполненить поле {string}")
+    @Если("не заполнить поле {string}")
     public void checkErrorDisplay(String nameField) {
         this.nameField = nameField;
     }
