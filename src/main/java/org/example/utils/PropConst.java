@@ -27,4 +27,5 @@ public class PropConst {
 
     public static final String JDBC_PASSWORD = "jdbc.password";
 
+    public static final String API_URL = "api.url";
 }
