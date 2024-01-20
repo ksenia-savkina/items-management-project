@@ -30,4 +30,6 @@ public class PropConst {
     public static final String TYPE_DRIVER = "type.driver";
 
     public static final String SELENOID_URL = "selenoid.url";
+    
+    public static final String API_URL = "api.url";
 }

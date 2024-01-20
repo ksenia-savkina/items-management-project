@@ -1,10 +1,12 @@
 package org.example.basetestsclass;
 
+import org.example.Specifications;
 import org.example.managers.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
+import static org.example.utils.PropConst.API_URL;
 import static org.example.utils.PropConst.BASE_URL;
 
 public class BaseTests {
@@ -37,6 +39,9 @@ public class BaseTests {
     @BeforeEach
     public void beforeEach() {
         driverManager.getDriver().get(TestPropManager.getTestPropManager().getProperty(BASE_URL));
+        Specifications.installSpecification(
+                Specifications.requestSpecification(TestPropManager.getTestPropManager().getProperty(API_URL)),
+                Specifications.responseSpecification(200));
     }
 
     @AfterAll
