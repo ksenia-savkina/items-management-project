@@ -10,6 +10,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.util.Map;
 
 import static org.example.utils.PropConst.*;
 
@@ -142,9 +143,11 @@ public class DriverManager {
     private void initRemoteDriver() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName(props.getProperty(TYPE_BROWSER));
-        capabilities.setVersion("108.0");
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", false);
+        capabilities.setVersion("109.0");
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", false
+        ));
 
         try {
             driver = new RemoteWebDriver(URI.create(props.getProperty(SELENOID_URL)).toURL(), capabilities);
