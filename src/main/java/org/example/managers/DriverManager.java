@@ -5,6 +5,11 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URI;
 
 import static org.example.utils.PropConst.*;
 
@@ -79,6 +84,10 @@ public class DriverManager {
      * Метод инициализирующий веб драйвер
      */
     private void initDriver() {
+        if ("remote".equalsIgnoreCase(props.getProperty(TYPE_DRIVER))) {
+            initRemoteDriver();
+        }
+
         if (OS.isFamilyWindows()) {
             initDriverWindowsOsFamily();
         } else if (OS.isFamilyMac()) {
@@ -127,6 +136,20 @@ public class DriverManager {
                 break;
             default:
                 Assertions.fail("Типа браузера '" + props.getProperty(TYPE_BROWSER) + "' не существует во фреймворке");
+        }
+    }
+
+    private void initRemoteDriver() {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setBrowserName(props.getProperty(TYPE_BROWSER));
+        capabilities.setVersion("108.0");
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", false);
+
+        try {
+            driver = new RemoteWebDriver(URI.create(props.getProperty(SELENOID_URL)).toURL(), capabilities);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
