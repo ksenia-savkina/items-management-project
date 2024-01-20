@@ -87,14 +87,14 @@ public class DriverManager {
     private void initDriver() {
         if ("remote".equalsIgnoreCase(props.getProperty(TYPE_DRIVER))) {
             initRemoteDriver();
-        }
-
-        if (OS.isFamilyWindows()) {
-            initDriverWindowsOsFamily();
-        } else if (OS.isFamilyMac()) {
-            initDriverMacOsFamily();
-        } else if (OS.isFamilyUnix()) {
-            initDriverUnixOsFamily();
+        } else {
+            if (OS.isFamilyWindows()) {
+                initDriverWindowsOsFamily();
+            } else if (OS.isFamilyMac()) {
+                initDriverMacOsFamily();
+            } else if (OS.isFamilyUnix()) {
+                initDriverUnixOsFamily();
+            }
         }
     }
 
